@@ -105,8 +105,8 @@ const VARIABLE_ELEMENTS = {
 const getRandom = <T,>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
 
 export default function App() {
-  // APIキーを固定値に変更
-  const apiKey = 'AIzaSyDVeVJZuYyfkZ2t2p8O0KGq-M1ZZpEc9ZY';
+  // APIキーを環境変数から取得
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
   
   const [loading, setLoading] = useState(false);
   const [step1Text, setStep1Text] = useState('');
