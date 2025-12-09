@@ -1,13 +1,89 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>animalimagegenerator</title>
   </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body class="bg-gray-50 text-slate-800 font-sans p-4 md:p-8">
+    <div class="max-w-7xl mx-auto">
+      <header class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <p class="text-slate-500 mt-1">実在しそうな「未知の動物」の画像生成用プロンプトを作成します</p>
+      </header>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 h-full">
+        <div class="space-y-6">
+          <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 space-y-4">
+            <div class="flex gap-2">
+              <button id="btn-9-16" class="flex-1 py-2 px-4 rounded-lg font-medium text-sm bg-indigo-600 text-white shadow-md">
+                9:16 (縦長)
+              </button>
+              <button id="btn-16-9" class="flex-1 py-2 px-4 rounded-lg font-medium text-sm bg-gray-100 text-gray-700 hover:bg-gray-200">
+                16:9 (横長)
+              </button>
+            </div>
+            <button id="btn-generate" class="w-full py-4 px-6 rounded-lg text-white font-medium text-lg flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 hover:shadow-lg shadow-md">
+              <span id="btn-generate-icon">📷</span>
+              <span id="btn-generate-text">新しい動物を発見する</span>
+            </button>
+            <div id="error-box" class="hidden mt-3 text-red-600 bg-red-50 p-3 rounded-md text-sm"></div>
+          </div>
+
+          <div class="space-y-4">
+            <div class="transition-all duration-500">
+              <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div id="step1-text" class="p-4 bg-slate-50 min-h-[100px] text-sm leading-relaxed whitespace-pre-line text-slate-700">
+                  待機中...
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col h-full">
+          <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden flex-grow flex flex-col h-full min-h-[500px]">
+            <div class="bg-gradient-to-r from-indigo-50 to-purple-50 px-6 py-3 border-b border-gray-200 flex justify-between items-center">
+              <h3 class="font-semibold text-indigo-900 flex items-center gap-2">
+                🎨 生成プロンプト
+              </h3>
+              <span id="ready-badge" class="hidden text-xs text-indigo-600 bg-indigo-100 px-2 py-1 rounded-full font-medium">
+                Ready to Copy
+              </span>
+            </div>
+
+            <div class="flex-grow bg-slate-50 p-6 flex flex-col relative">
+              <div id="placeholder" class="flex-grow flex flex-col items-center justify-center text-gray-400">
+                <div class="text-center">
+                  <p class="mb-2">左側のボタンで<br/>生成を開始してください</p>
+                </div>
+              </div>
+              <div id="prompt-area" class="hidden flex-grow flex flex-col gap-4">
+                <div class="flex flex-col flex-1">
+                  <label class="text-sm font-semibold text-slate-700 mb-2">最終プロンプト</label>
+                  <textarea id="step2-text" class="w-full h-full min-h-[220px] bg-white border border-gray-300 rounded-lg p-4 font-mono text-sm leading-relaxed text-slate-700 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 flex-1"></textarea>
+                </div>
+                <div class="flex flex-col flex-1">
+                  <label class="text-sm font-semibold text-slate-700 mb-2">Geminiに送信したプロンプト</label>
+                  <textarea id="gemini-request-text" class="w-full h-full min-h-[160px] bg-white border border-gray-300 rounded-lg p-4 font-mono text-sm leading-relaxed text-slate-700 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 flex-1"></textarea>
+                </div>
+                <div class="flex justify-end">
+                  <button id="btn-copy" class="flex items-center gap-2 px-6 py-3 rounded-lg font-medium shadow-sm bg-indigo-600 text-white hover:bg-indigo-700 hover:shadow-md">
+                    📋 プロンプトをコピー
+                  </button>
+                </div>
+              </div>
+              <div id="loading-indicator" class="hidden absolute inset-0 bg-slate-50/80 backdrop-blur-sm flex items-center justify-center text-gray-500">
+                <div class="text-center">
+                  <div class="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mx-auto mb-4"></div>
+                  <p class="animate-pulse">プロンプトを生成中...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>

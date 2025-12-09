@@ -1,9 +1,24 @@
-# 架空の動物の画像生成
+# 架空の動物の画像生成 (Vanilla JS + Vite)
 
-生成用のプロンプトを作ります。
+バニラJSとTailwindで動く、架空の動物プロンプト生成ツールです。
 
-## 準備
-プロンプトをつくるのにGeminiのAPIを使用します。
-.envを作成して以下のように記述してください。
+## セットアップ
+1. 依存インストール
+   ```bash
+   npm install
+   ```
+2. APIキーを `.env` に設定
+   ```
+   VITE_GEMINI_API_KEY=XXXXXXXX
+   ```
+
+## 開発サーバー
 ```
-VITE_GEMINI_API_KEY=XXXXXXXX
+npm run dev
+```
+ブラウザで表示されたローカルURLへアクセスしてください。
+
+## ビルド
+```
+npm run build
+```
